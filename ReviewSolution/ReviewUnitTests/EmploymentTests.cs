@@ -25,7 +25,6 @@ namespace ReviewUnitTests
             Assert.AreEqual(expectedYears, employment.Years, "Default employment Years values not as expected:" +
                 $"{expectedYears} vs {employment.Years}");
 
-
         }
 
 
@@ -107,6 +106,26 @@ namespace ReviewUnitTests
             {
                 Assert.Fail($"Unexpected exception of type {ex.GetType()} caught {ex.Message}");
             }
+        }
+
+        [TestMethod]
+        [DataRow(SupervisoryLevel.Entry)]
+      //  [DataRow("Boss", SupervisoryLevel.Entry, 25.2)]
+
+        public void Employment_SetSupervisoryLevel_GoodSet(SupervisoryLevel level)
+        {
+
+            //arrange  (setup of data)
+            Employment employment = new Employment("Boss", SupervisoryLevel.DepartmentHead, 3.5);
+
+            //act (call the method for testing)
+            employment.SetEmploymentResponsibilityLevel(level);
+
+            //assess (check to success)
+            Assert.IsTrue(employment.Level == level, $"Emplyment level of {employment.Level} is incorrect, should be {level}.");
+
+
+
         }
     }
 }
