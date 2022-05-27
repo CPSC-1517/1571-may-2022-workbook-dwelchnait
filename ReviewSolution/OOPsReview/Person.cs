@@ -61,21 +61,62 @@ namespace OOPsReview.Data
 
         public List<Employment> EmploymentPositions { get; private set; }
 
-        public Person()
+        //this property will compile cleanly
+        //this property will return a value IF EmploymentPostions has a instance of List<T>
+        //this property WILL ABORT IF EmploymentPositions has NOT be set to an instance of List<T>
+        public int NumberOfPositions { get { return EmploymentPositions.Count; } }
+
+        //public Person()
+        //{
+        //    //the system will automatically assign default system values to
+        //    //   our datamembers accordingly to there datatype
+        //    //strings -> null
+        //    //objects -> null
+        //    //
+        //    // firstname and lastname has validation voiding a null value
+        //    FirstName = "Unknown";
+        //    LastName = "Unknown";
+        //    //if one tried to reference an instance's data and the instance is
+        //    //   null THEN one would get a exception: null excepiton
+        //    //even though you have no instances to store, you will at least have
+        //    //  someplace to put the data ONCE it is supplied
+        //    EmploymentPositions = new List<Employment>();
+        //}
+
+        //Option 2
+        //DO not coded a "Default" constructor
+        //Code ONLY the "Greedy" constructor
+        //if only a greedy constructor exists for the class, the ONLY
+        //  way to possibly create an instance for the class within
+        //  the program would be to use the constructor when he class
+        //  instance is created
+
+        public  Person(string firstname, string lastname, ResidentAddress address,
+                        List<Employment> employmentpositions)
         {
-            //the system will automatically assign default system values to
-            //   our datamembers accordingly to there datatype
-            //strings -> null
-            //objects -> null
-            //
-            // firstname and lastname has validation voiding a null value
-            FirstName = "Unknown";
-            LastName = "Unknown";
-            //if one tried to reference an instance's data and the instance is
-            //   null THEN one would get a exception: null excepiton
-            //even though you have no instances to store, you will at least have
-            //  someplace to put the data ONCE it is supplied
-            EmploymentPositions = new List<Employment>();
+            FirstName = firstname;
+            LastName = lastname;
+            Address = address;
+            if(employmentpositions != null)
+                EmploymentPositions = employmentpositions;
+            else
+                //allow a null parameter value and the class to have an empty List<T>
+                EmploymentPositions = new List<Employment>();
+        }
+
+        public void ChangeName(string firstname, string lastname)
+        {
+            FirstName = firstname;
+            LastName=lastname;
+        }
+
+        public void AddEmployment(Employment employment)
+        {
+            if (employment == null)
+            {
+                throw new ArgumentNullException("You must supply an employment record for it to be add to this person");
+            }
+            EmploymentPositions.Add(employment);
         }
     }
 }
