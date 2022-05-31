@@ -44,10 +44,25 @@ Console.WriteLine(Address.ToString());
 Person me = null; //a variable capable of holding a Person instance
 me = CreatePerson(Job, Address);
 
+//OR
+//Person me = CreatePerson(Job, Address);
+
 //Access (check your results)
 Console.WriteLine($"{me.FirstName} {me.LastName} lives at {me.Address.ToString()}" +
     $" having a job count of {me.NumberOfPositions}");
+Console.WriteLine("\nJobs: output via foreach loop\n");
+foreach(var item in me.EmploymentPositions)
+{
+    if (item.Years > 0)
+        Console.WriteLine(item.ToString());
+}
 
+Console.WriteLine("\nJobs: output via for loop\n");
+for(int i = 0; i < me.EmploymentPositions.Count; i++)
+{
+    if (me.EmploymentPositions[i].Years > 0)
+        Console.WriteLine(me.EmploymentPositions[i].ToString());
+}
 void CreateJob(ref Employment job)
 {
     //since the class MAY throw exceptions, you should have user friendly error handling
@@ -93,7 +108,25 @@ ResidentAddress CreateAddress()
 
 Person CreatePerson(Employment job, ResidentAddress address)
 {
-    Person me = new Person("Don", "Welch", address, null);
-    me.AddEmployment(job);
+    //Person me = new Person("Don", "Welch", address, null);
+
+    //one could add the job(s) to the instance of Person (me) after
+    //  the instance is created via the behaviour AddEmployment(Employment emp)
+    //me.AddEmployment(job);
+
+    //OR
+
+    //one could create a List<T> and add to the list<T> before creating the Person instance
+    List<Employment> employments = new List<Employment>(); //create the List<T> instance
+    employments.Add(job); //add a element to the List<T>
+    Person me = new Person("Don", "Welch", address, employments); //using the greedy constructor
+
+    //create additional jobs and load to Person
+    Employment employment = new Employment("New Hire",SupervisoryLevel.Entry,0.5);
+    me.AddEmployment(employment);
+    employment = new Employment("Team Head", SupervisoryLevel.TeamLeader, 5.2);
+    me.AddEmployment(employment);
+    employment = new Employment("Department IT head", SupervisoryLevel.DepartmentHead, 6.8);
+    me.AddEmployment(employment);
     return me;
 }
