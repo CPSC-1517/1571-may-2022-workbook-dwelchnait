@@ -81,6 +81,18 @@ if (Employment.TryParse(theRecord, out theParsedRecord))
 //if the TryParse failed, you would be handling it via your user frindly error handling
 //  code
 
+// File I/O
+//writing a comma separated value file
+string pathname = WriteCSVFile();
+
+//read a comma separated value file
+//we will be using ReadAllLines(pathname); returns an array of strings; each
+//  array element is one line in your csv file.
+//List<Employment> jobs = ReadCSVFile(pathname);
+
+//writing a JSON file
+
+//Read a JSON file
 
 void CreateJob(ref Employment job)
 {
@@ -148,4 +160,47 @@ Person CreatePerson(Employment job, ResidentAddress address)
     employment = new Employment("Department IT head", SupervisoryLevel.DepartmentHead, 6.8);
     me.AddEmployment(employment);
     return me;
+}
+
+string WriteCSVFile()
+{
+    string pathname = "";
+    try
+    {
+        List<Employment> jobs = new List<Employment>();
+        Employment theEmployment = new Employment("trainee", SupervisoryLevel.Entry, 0.5);
+        jobs.Add(theEmployment);
+        jobs.Add(new Employment("worker", SupervisoryLevel.TeamMember, 3.5));
+        jobs.Add(new Employment("lead", SupervisoryLevel.TeamLeader, 7.4));
+        jobs.Add(new Employment("dh new projects", SupervisoryLevel.DepartmentHead, 1.0));
+
+        //create a list of comma separated value strings
+        //the contents of each string will be 3 values of Emmployment
+        List<string> csvlines = new ();
+
+        //place all the instances of Employment in the collection of jobs
+        //  in the csvlines using .ToString() of the Employment class
+        foreach (var item in jobs)
+        {
+            csvlines.Add(item.ToString());
+        }
+
+        //write to a text file the csv lines
+        //each line represents a Employment instance
+        //you could use StreamWriter
+        //HOWEEVER within the File class there is a method that outputs a list of strings
+        //  all within ONE command. There is NO NEED for a StreamWriter instance
+        //the pathname is the minimum for the command
+        //the file by default will be created in the same folder as your .exe file
+        //you CAN alter the path name using relative addressing
+
+        pathname = "../../../Employment.csv";
+        File.WriteAllLines(pathname, csvlines);
+        Console.WriteLine($"\n Check out the CSV file at: {Path.GetFullPath(pathname)}");
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    return Path.GetFullPath(pathname);
 }
