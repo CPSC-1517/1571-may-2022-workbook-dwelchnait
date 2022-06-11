@@ -1,0 +1,35 @@
+{
+  "FirstName": "Don",
+  "LastName": "Welch",
+  "EmploymentPositions": [
+    {
+      "Title": "Boss",
+      "Level": 5,
+      "Years": 25.5
+    },
+    {
+      "Title": "New Hire",
+      "Level": 0,
+      "Years": 0.5
+    },
+    {
+      "Title": "Team Head",
+      "Level": 2,
+      "Years": 5.2
+    },
+    {
+      "Title": "Department IT head",
+      "Level": 4,
+      "Years": 6.8
+    }
+  ],
+  "NumberOfPositions": 4,
+  "Address": {
+    "Unit": "",
+    "City": "Edmonton",
+    "Number": 10706,
+    "Address1": "106 st",
+    "Address2": "",
+    "ProvinceState": "AB"
+  }
+}
