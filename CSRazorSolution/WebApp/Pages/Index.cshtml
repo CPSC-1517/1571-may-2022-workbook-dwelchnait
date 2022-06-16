@@ -1,0 +1,19 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the world of Razor Pages</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@if(string.IsNullOrWhiteSpace(Model.MyName))
+{
+    <p>the world of Razor Pages is apparently in an odd state at this time.</p>
+}
+else
+{
+    <p>@Model.MyName</p>
+}

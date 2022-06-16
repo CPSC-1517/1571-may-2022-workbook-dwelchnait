@@ -105,7 +105,7 @@ namespace OOPsReview.Data
         //  the program would be to use the constructor when he class
         //  instance is created
 
-        //for JSON deserialization requires proper matching construct parameter names
+        //for JSON deserialization requires proper matching constructor parameter names
         //your constructor parameter names MUST MATCH your property variable names
         //the parameter names are NOT case sensitive
         //the order of the parameters on the constructor does not affect the JSON
