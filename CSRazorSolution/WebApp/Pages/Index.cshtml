@@ -1,9 +1,29 @@
 ﻿@page
-@model IndexModel
+@model IndexModel  //indicates the class name of the PageModel
 @{
     ViewData["Title"] = "Home page";
 }
 
+@*
+    The web page is made up of 2 major components:
+    a) the layout page located in the folder /Pages/Shared as a file called _Layout
+    b) the content page
+
+    The content page should be places in the /Pages folder
+    The content page(s) can be placed in a subfoler(s) under the /Pages folder
+    The content page is made up of 2 components in separate files
+       a) xxxx.cshtml file - contains the html controls and display c# logic
+       b) xxxx.cshtml.cs file - this is the PageModel class file
+                                this contains the logic to drive the web page
+                                this DOES NOT contain any html controls
+                                this DOES contain properties for the model class
+                                    to transfer data between your web controls
+                                    and the model class properties.
+                                this file is some times referred to as "code-behind"
+*@
+<!-- 
+    comments via html comment indicators
+-->
 <div class="text-center">
     <h1 class="display-4">Welcome to the world of Razor Pages</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
