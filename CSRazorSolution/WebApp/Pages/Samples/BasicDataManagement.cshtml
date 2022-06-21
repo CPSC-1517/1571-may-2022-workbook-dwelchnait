@@ -6,3 +6,46 @@
 }
 
 <h1>Basic Data Management</h1>
+
+@*
+    <form> arguments: method - indicates how data is transfered to server
+                         get - visible on URL in plain text
+                        post - embedded within the form objects sent to the
+                                server, not visible
+                      action -directs the server to the page to process form
+                             - optional
+                             - missing or  = "" goes to current 
+
+    Controls: label, input, button
+
+    <label> does not need arguments,
+            can have helper tags such as asp-for, asp-validate
+            depending on css stylessheets, you can get different results
+
+    <input> use to accept input from the page user
+            has various types of acceptable inputs (type="")
+            can tie the control to a property on the ModelPage directly
+                 by using the helper tag asp-for="propertyname"
+
+    <button> three types
+             submit: sens the form to the server for processing
+             reset: locally clears the form and does NOT send to server
+                        for processing
+             button:
+
+*@
+
+<form method="post">
+    <label>
+        Enter a number <input type="number" asp-for="Num"/>
+    </label>
+
+    <label>
+        this is a textarea for a great deal of text
+        <textarea asp-for="MassText" rows="5" cols="100"></textarea>
+    </label>
+    <button type="submit" id="jsIdentitier" name="RequestObjectIdentifier">
+        Press Me A (submit form)
+    </button>
+</form>
+@Model.Feedback

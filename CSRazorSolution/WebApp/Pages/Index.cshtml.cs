@@ -32,7 +32,7 @@ namespace WebApp.Pages
         {
             //once in the request method, you are in control of what is being
             //  processed on the web page for the current request
-
+            // the code within this method is the work that I WISH to be done
             Random rnd = new Random();
             int value = rnd.Next(0,100); //100 is NOT include
             if (value % 2 == 0)
