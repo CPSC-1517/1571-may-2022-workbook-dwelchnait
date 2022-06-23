@@ -26,6 +26,28 @@
             has various types of acceptable inputs (type="")
             can tie the control to a property on the ModelPage directly
                  by using the helper tag asp-for="propertyname"
+            can be a self-closing tag (<xxxx ... />)
+
+    <textarea> use to accept input from the page user
+               use to accept large amounts of text information generally
+                   entered as a set of lines, or one long continuous string
+               can set the rows="x" for the vertical height and cols="x"
+                   for the horizontal number of characters per line
+               requires a paired set of tags (<xxx ....> </xxxx>)
+
+    <select>/<option> use to display a list of choices to the page user from 
+                        which to select
+                      other names: combobox, dropdownlist, selectlist
+                      this control can have an optional "prompt line" which
+                         sets as the first line in the list of choices
+                      the control requires a paired set of tags <select></select>
+                      the choice lines within the control are created using
+                         the paired set of tags <option></option>
+                      each line in the list is a set of option tags
+                      this control can be "hard-code" with choices
+                      this control can be generated dynamically using a data 
+                          collection (List<T>) from a database.
+                      <option value="returndatavalue"> displayed text </option>
 
     <button> three types
              submit: sens the form to the server for processing
@@ -44,6 +66,18 @@
         this is a textarea for a great deal of text
         <textarea asp-for="MassText" rows="5" cols="100"></textarea>
     </label>
+
+    <label>
+        Select a favourite course from the drop down list
+        <select asp-for="FavouriteCourse">
+            <option value="0">select ...</option>
+            <option value="1008">COMP1008</option>
+            <option value="1012">CPSC1012</option>
+            <option value="1017">COMP1017</option>
+            <option value="1517">CPSC1517</option>
+        </select>
+    </label>
+    <br/><br/>
     <button type="submit" id="jsIdentitier" name="RequestObjectIdentifier">
         Press Me A (submit form)
     </button>
