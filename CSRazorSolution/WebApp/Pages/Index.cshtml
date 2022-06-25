@@ -29,11 +29,29 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+<section class="setflex">
+    <div class="onethird">
+        <img src="~/img/WestWind.png" alt="full west wind logo" />
+    </div>
+    <div>
+        <p> <span style="font-size:large;color:firebrick;">Thumbnail</span>
+             An image that is usually a small version of another image. Used
+              where a small image gives meaning and is purposeful.</p>
+        <p> <span style="font-size:large;color:firebrick;">Logo</span>
+             An image tha is usually a branding image for a company or organization.
+             </p>
+    </div>
+</section>
+
+
+
+
 @if(string.IsNullOrWhiteSpace(Model.MyName))
 {
     <p>the world of Razor Pages is apparently in an odd state at this time.</p>
 }
 else
 {
-    <p>@Model.MyName</p>
+    @*in-line css*@
+    <p style="font-size:large;color:forestgreen;font-style:italic;">@Model.MyName</p>
 }
