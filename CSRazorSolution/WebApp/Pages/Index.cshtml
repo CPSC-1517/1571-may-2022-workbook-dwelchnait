@@ -55,3 +55,18 @@ else
     @*in-line css*@
     <p style="font-size:large;color:forestgreen;font-style:italic;">@Model.MyName</p>
 }
+
+<br/><br/>
+@if(Model.buildVersionInfo == null)
+{
+    <p style="font-weight:bold;">Build Version is Unknown</p>
+}
+else
+{
+    <p> Database version: @Model.buildVersionInfo.Major .
+                          @Model.buildVersionInfo.Minor .
+                          @Model.buildVersionInfo.Build
+        was released on @Model.buildVersionInfo.ReleaseDate.ToShortDateString()
+    </p>
+}
+

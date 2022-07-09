@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WestWindSystem.BLL;
+
+#region Additional Namespaces
+using WestWindSystem.Entities;
+#endregion
 
 namespace WebApp.Pages
 {
@@ -10,15 +15,23 @@ namespace WebApp.Pages
         //this is composition
         //this is a local field
         private readonly ILogger<IndexModel> _logger;
+        private readonly BuildVersionServices _buildVersionServices;
+
 
         //constructor
         //this constructor receive an injection of a service
         //this injection is referred to as Injection Dependency
-        public IndexModel(ILogger<IndexModel> logger)
+        //the second parameter in the list is the injection dependency to be able
+        //      to use the BuildVersionSerives we build in our class library
+        public IndexModel(ILogger<IndexModel> logger, 
+                            BuildVersionServices bvservices)
         {
             _logger = logger;
+            _buildVersionServices = bvservices;
         }
 
+        [BindProperty]
+        public BuildVersion buildVersionInfo { get; set; }
         //this is a local property
         public string MyName { get; set; }
 
@@ -44,6 +57,9 @@ namespace WebApp.Pages
                 MyName = null;
             }
 
+            //make my first call to the database using the services within
+            //  BuildVersionServices of the class library
+            buildVersionInfo = _buildVersionServices.GetBuildVersion();
             //control is returned to the web server
         }
     }
