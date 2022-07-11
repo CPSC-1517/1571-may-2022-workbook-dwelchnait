@@ -36,7 +36,8 @@ namespace WestWindSystem.DAL
         //the properties represent a collection of instances of the entity
         //  retrieved from or sent to the database
         //one property per entity in Entities
-        public DbSet<BuildVersion> BuildVersions { get; set; } 
+        public DbSet<BuildVersion> BuildVersions { get; set; }
+
 
     }
 }
