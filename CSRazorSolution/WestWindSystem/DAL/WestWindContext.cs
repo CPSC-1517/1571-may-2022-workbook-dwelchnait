@@ -37,6 +37,7 @@ namespace WestWindSystem.DAL
         //  retrieved from or sent to the database
         //one property per entity in Entities
         public DbSet<BuildVersion> BuildVersions { get; set; }
+        public DbSet<Region> Regions { get; set; }
 
 
     }

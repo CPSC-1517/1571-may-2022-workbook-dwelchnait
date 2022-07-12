@@ -1,0 +1,65 @@
+﻿@page
+@model WebApp.Pages.Samples.RegionQueryOneModel
+@{
+    ViewData["Title"] = "PKey Region Query";
+}
+<h1>Query: Region query by primary key</h1>
+
+<p>@Model.FeedbackMessage</p>
+
+<form method="post">
+    <label>
+        @* the type attribute can be set to different input for acceptable value
+            "number" restricts input to numerics
+            the numerics are by default whole numbers
+            the numberics can be negative or positive
+           additional attributes can be used to refine the acceptable values
+            min="xxx" indicates the minumum acceptable value
+            max="xxx" indicates the maximum acceptable value
+            step="xxx" indicates the increments of the acceptable values
+                step="1" (default) whole numbers increments of 1 (1,2,3,...)
+                step="0.01" decimal numbers increments of .01 (great for $ amounts)
+            required indicates that the field must have a value
+
+            When you use these validation attributes on your form input controls
+                the user MUST meet the validation BEFORE the form is sent to the
+                web server for processing
+
+            the attribute formnovalidate overrides any validation (html5) that exists
+                on your form controls
+        *@
+        Enter Region ID:
+        <input type="number" asp-for="regionid" style="width:80px"
+            placeholder="enter your region id number"
+            step="1" required/>
+    </label>
+    <label>
+        Select a Region:
+        <select asp-for="selectRegion" style="width:250px;">
+            @* if you do not indicate a specific option to display
+                 then the list defaults to the first option line
+            *@
+            <option value="0">select ... </option>
+            @foreach(var item in Model.regionsList)
+            {
+                //to retain the selection, you need to specify a row to be
+                //  the selected option
+                //this is done with the selected attribute on the value 
+                if (item.RegionID == Model.selectRegion)
+                {
+                    <option value="@item.RegionID" selected>@item.RegionDescription</option>
+
+                }
+                else
+                {
+                    <option value="@item.RegionID">@item.RegionDescription</option>
+                }
+            }
+        </select>
+    </label>
+    <br/>
+    <button type="submit" asp-page-handler="Fetch">Fetch By Id</button>&nbsp;&nbsp;
+    <button type="submit" asp-page-handler="Select" formnovalidate>Select By Description</button>&nbsp;&nbsp;
+    <button type="submit" asp-page-handler="Clear" formnovalidate>Clear</button>
+</form>
+
