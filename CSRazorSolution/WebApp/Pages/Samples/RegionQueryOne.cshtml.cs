@@ -96,8 +96,9 @@ namespace WebApp.Pages.Samples
         public IActionResult OnPostClear()
         {
             FeedbackMessage = "";
-            //regionid = 0;
+            regionid = 0;
             ModelState.Clear();
+            PopulateLists();
             return Page();
         }
         public void RetrieveRegion(int id)
