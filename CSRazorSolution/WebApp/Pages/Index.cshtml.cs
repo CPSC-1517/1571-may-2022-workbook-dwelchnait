@@ -47,14 +47,14 @@ namespace WebApp.Pages
             //  processed on the web page for the current request
             // the code within this method is the work that I WISH to be done
             Random rnd = new Random();
-            int value = rnd.Next(0,100); //100 is NOT include
+            int value = rnd.Next(0,24); //100 is NOT include
             if (value % 2 == 0)
             {
                 MyName = $"Don ({value}) welcome to the wide wild world of Razor Pages";
             }
             else
             {
-                MyName = null;
+                MyName = $"{value}";
             }
 
             //make my first call to the database using the services within

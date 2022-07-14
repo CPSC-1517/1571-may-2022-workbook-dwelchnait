@@ -1,0 +1,111 @@
+﻿@page "{searcharg?}"
+@model WebApp.Pages.Samples.PartialFilterSearchModel
+@{
+    ViewData["Title"] = "Partial String Table Query";
+}
+<h1>Partial String query resulting in a Table display</h1>
+
+<p>@Model.Feedback</p>
+
+<form method="post">
+    <label>
+        Enter a partial Territory description:
+        <input type="text" asp-for="searcharg"
+            placeholder="enter your description"/>
+    </label>
+    <br/>
+    @*restrict the display of the table to when there is data to view
+        The first IF checks to see if an instance of TerritoryInfo actually exists
+    *@
+    @if (Model.TerritoryInfo != null)
+    {
+        @*This IF checks to see if any records were found when the query was executed*@
+        if (Model.TerritoryInfo.Count == 0)
+        {
+            <p style="color:blueviolet; font-weight:bold; font-size:large;">
+                There are no territories matching your search request.
+            </p>
+        }
+        else
+        {
+            @*
+                Records have been found to display
+                The number of records is unknown
+                Use a tabular (grid table) layout to display the records
+                Use the <table> tag and its components <thead>,<tbody>,<tfoot>
+            *@
+            <table>
+                <thead>
+                    @*used for column titles*@
+                    <tr>
+                        <th>Territory</th>
+                        <th>Name</th>
+                        <th>Region</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*used for the table details
+                        the number of rows are unsually unknown for a db query
+                    *@
+                    @foreach (var item in Model.TerritoryInfo)
+                    {
+                        <tr>
+                            <td>
+                                @*
+                                    this example will send the TerritoryID to
+                                    another page
+                                    use the anchor tag to accomplish this task
+                                    the href page value MUST be reference from
+                                       the Page folder
+                                    the value to be passed is attached to the
+                                       end of the page reference
+                                    In this example, the value will be passed
+                                       to the receivng page as a routing parameter
+                                    You CAN send multiple values to the new page
+                                    The receiving page MUST have the same number of
+                                       routing parameters as those past AND the 
+                                       order of the routing parameters is IMPORTANT
+                                    Page reference syntax: /pathname/value[/value/...]
+                                    The text of your anchor tag DOES NOT need to be
+                                       the value that is being passed
+                                *@
+                                <a href="/Samples/ReceivingPage/@item.TerritoryID">
+                                    Edit this territory
+                                </a>
+                                
+                                @*<a href="/Samples/ReceivingPage?tid=@item.TerritoryID">
+                                    Edit this territory
+                                </a>*@
+                            </td>
+                            <td>@item.TerritoryDescription</td>
+                            <td><select disabled="true">
+                                    @foreach (var region in Model.RegionList)
+                                    {
+                                        if (region.RegionID == item.RegionID)
+                                        {
+                                            <option value="@region.RegionID" selected>@region.RegionDescription</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@region.RegionID">@region.RegionDescription</option>
+                                        }
+                                    }
+                                </select> 
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                 @*used for summay table information eg totals
+                   used for displaying paging information                                       
+                 *@
+                    
+                </tfoot>
+            </table>
+        }
+    }
+    <button type="submit" asp-page-handler="Fetch">Fetch Territories</button>&nbsp;&nbsp;
+    <button type="submit" asp-page-handler="Clear" formnovalidate>Clear</button>&nbsp;&nbsp;
+    <button type="submit" asp-page-handler="New" formnovalidate>New Territory</button>
+
+</form>
