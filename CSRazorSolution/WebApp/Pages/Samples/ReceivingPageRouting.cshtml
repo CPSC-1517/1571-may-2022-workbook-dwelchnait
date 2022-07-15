@@ -1,7 +1,7 @@
-﻿@page 
-@model WebApp.Pages.Samples.ReceivingPageModel
+﻿@page "{territoryid?}"
+@model WebApp.Pages.Samples.ReceivingPageRoutingModel
 @{
-    ViewData["Title"] = "Receiving Get Request passed data";
+    ViewData["Title"] = "Receiving routing passed data";
 }
 <h1>Receiving Pass of passed data</h1>
 

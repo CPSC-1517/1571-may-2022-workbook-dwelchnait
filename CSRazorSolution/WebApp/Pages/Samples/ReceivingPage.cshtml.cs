@@ -5,20 +5,13 @@ namespace WebApp.Pages.Samples
 {
     public class ReceivingPageModel : PageModel
     {
-        [BindProperty(SupportsGet = true)]
-        public int? territoryid { get; set; }
+        [BindProperty]
+        public int territoryid { get; set; }
 
-        public void OnGet()
+        public void OnGet(int tid)
         {
+            territoryid = tid;
         }
-
-        //[BindProperty]
-        //public int territoryid { get; set; }
-        //
-        //public void OnGet(int tid)
-        //{
-        //    territoryid = tid;
-        //}
 
     }
 }
