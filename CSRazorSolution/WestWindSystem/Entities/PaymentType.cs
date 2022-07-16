@@ -8,20 +8,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WestWindSystem.Entities
 {
-    public partial class Region
+    public partial class PaymentType
     {
-        public Region()
+        public PaymentType()
         {
-            Territories = new HashSet<Territory>();
+            Payments = new HashSet<Payment>();
         }
 
         [Key]
-        public int RegionID { get; set; }
+        public byte PaymentTypeID { get; set; }
         [Required]
-        [StringLength(50)]
-        public string RegionDescription { get; set; }
+        [StringLength(40)]
+        [Unicode(false)]
+        public string PaymentTypeDescription { get; set; }
 
-        [InverseProperty("Region")]
-        public virtual ICollection<Territory> Territories { get; set; }
+        [InverseProperty("PaymentType")]
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }
