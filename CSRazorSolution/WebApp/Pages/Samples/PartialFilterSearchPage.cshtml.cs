@@ -55,7 +55,10 @@ namespace WebApp.Pages.Samples
             }
             else
             {
-                TerritoryInfo = _territoryServices.GetByPartialDescription(searcharg);
+                //this needs to be commented out ONCE you have installed paging in the
+                //      RedirecToPage version of this example.
+
+                //TerritoryInfo = _territoryServices.GetByPartialDescription(searcharg);
             }
             return Page();
         }
