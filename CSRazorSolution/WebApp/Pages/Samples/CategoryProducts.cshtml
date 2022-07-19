@@ -1,0 +1,33 @@
+﻿@page "{categoryid?}"
+@model WebApp.Pages.Samples.CategoryProductsModel
+@{
+    ViewData["Title"] = "Category Products CRUD";
+}
+<h1>CRUD Category Products</h1>
+
+<p>@Model.Feedback</p>
+
+<form method="post">
+    <label> 
+        @*on a select tag
+            option value is the data being returned for your selection
+            the value between the opening tag and closing tag is being display on the 
+                 web page
+        *@
+        Select a category:
+        <select asp-for="categoryid">
+            <option value="0">select ....</option>
+            @foreach(var cat in Model.CategoryList)
+            {
+                <option value="@cat.CategoryID"
+                    selected=@(cat.CategoryID == Model.categoryid)>
+                @cat.CategoryName
+                </option>
+            }
+        </select>
+    </label>
+    <br/><br/>
+    <button type="submit" asp-page-handler="Search">Search</button>&nbsp;&nbsp;    
+    <button type="submit" asp-page-handler="Clear">Clear</button>
+
+</form>
