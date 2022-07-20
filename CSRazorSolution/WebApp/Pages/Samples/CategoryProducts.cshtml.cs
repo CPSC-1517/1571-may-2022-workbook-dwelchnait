@@ -15,12 +15,16 @@ namespace WebApp.Pages.Samples
         #region Private service fields & class constructor
         private readonly CategoryServices _categoryServices;
         private readonly ProductServices _productServices;
+        private readonly SupplierServices _supplierServices;
+
 
         public CategoryProductsModel(CategoryServices categoryservices,
-                                        ProductServices productservices)
+                                        ProductServices productservices,
+                                        SupplierServices supplierServices)
         {
             _categoryServices = categoryservices;
             _productServices = productservices;
+            _supplierServices=supplierServices;
         }
         #endregion
         // this property is being used as the routing paramenter
@@ -30,6 +34,9 @@ namespace WebApp.Pages.Samples
         public int? categoryid { get; set; }
 
         public List<Category> CategoryList { get; set; }
+
+        public List<Supplier> SupplierList { get; set; }
+        public List<Product> ProductList { get; set; }
 
         /// <summary>
         /// why Feedback needs to be carried to the web page which will call
@@ -41,12 +48,17 @@ namespace WebApp.Pages.Samples
 
         public void OnGet()
         {
+            if (categoryid.HasValue)
+                if (categoryid.Value > 0)
+                    ProductList = _productServices.Product_GetByCategory(categoryid.Value);
             PopulateLists();
         }
 
         public void PopulateLists()
         {
             CategoryList = _categoryServices.Category_List();
+            SupplierList = _supplierServices.Supplier_List();
+
         }
 
         public IActionResult OnPostSearch()
@@ -65,5 +77,12 @@ namespace WebApp.Pages.Samples
             ModelState.Clear();
             return RedirectToPage(new { categoryid = categoryid });
         }
+
+        public IActionResult OnPostNew()
+        {
+           
+            return RedirectToPage("/Samples/CRUDProduct");
+        }
+
     }
 }

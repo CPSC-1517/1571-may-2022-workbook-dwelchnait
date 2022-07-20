@@ -28,6 +28,59 @@
     </label>
     <br/><br/>
     <button type="submit" asp-page-handler="Search">Search</button>&nbsp;&nbsp;    
-    <button type="submit" asp-page-handler="Clear">Clear</button>
+    <button type="submit" asp-page-handler="Clear">Clear</button>&nbsp;&nbsp; 
+    <button type="submit" asp-page-handler="New">New Product</button> 
+    <br/><br/>
+    @if (Model.ProductList != null)
+    {
+        if (Model.ProductList.Count() == 0)
+        {
+            <p>There are no products on file for the selected category.</p>
+        }
+        else
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Supplier</th>
+                        <th>Unit Size</th>
+                        <th>Disc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.ProductList )
+                    {
+                        <tr>
+                            <td>
+                                <a href="/Samples/CRUDProduct/@item.ProductID">
+                                    @item.ProductName</a>
+                            </td>
+                            <td>
+                                <select disabled="true">
+                                    @foreach(var sup in Model.SupplierList)
+                                    {
+                                        <option value="@sup.SupplierID"
+                                            selected=@(sup.SupplierID == item.SupplierID)>
+                                        @sup.CompanyName
+                                        </option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                @item.QuantityPerUnit
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="@item.Discontinued">
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+
+                </tfoot>
+            </table>
+        }
+    }
 
 </form>
