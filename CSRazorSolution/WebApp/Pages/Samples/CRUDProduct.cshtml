@@ -110,4 +110,37 @@
             <input type="checkbox" asp-for="ProductInfo.Discontinued" value="true" />
             &nbsp;&nbsp; (discontinued if checked)
     </label>
+    <br/><br/>
+    @*Manage the buttons, restricting user access*@
+    @if(Model.productid.HasValue)
+    {
+       <button type="submit" asp-page-handler="New" disabled>Save New</button> 
+       <button type="submit" asp-page-handler="Update">Update</button> 
+       @*add Javascript prompt (pre-code method) for delete confirmation using the 
+           onclick event of the button
+
+         this button should be able to be press whether the is valid data or not
+           being displayed. You are planning to delete the data from the database.
+       *@
+       <button type="submit" asp-page-handler="Delete" formnovalidate
+        onclick="return confirm('Are you sure you wish to discontinue the product?')"
+       >Discontinued</button> 
+    }
+    else
+    {
+        <button type="submit" asp-page-handler="New" >Save New</button> 
+       <button type="submit" asp-page-handler="Update" disable>Update</button> 
+       @*add Javascript prompt (pre-code method) for delete confirmation using the 
+           onclick event of the button
+
+         this button should be able to be press whether the is valid data or not
+           being displayed. You are planning to delete the data from the database.
+       *@
+       <button type="submit" asp-page-handler="Delete" formnovalidate disabled
+        onclick="return confirm('Are you sure you wish to discontinue the product?')"
+       >Discontinued</button>
+    }
+    <button type="submit" asp-page-handler="Clear" formnovalidate>Clear</button> 
+    <button type="submit" asp-page-handler="Search" formnovalidate>Return to Search</button> 
+
 </form>
