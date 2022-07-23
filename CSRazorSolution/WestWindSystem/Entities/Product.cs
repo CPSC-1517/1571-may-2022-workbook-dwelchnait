@@ -15,6 +15,8 @@ namespace WestWindSystem.Entities
     [Index("SupplierID", Name = "SuppliersProducts")]
     public partial class Product
     {
+        private decimal _UnitPrice;
+
         public Product()
         {
             ManifestItems = new HashSet<ManifestItem>();
@@ -33,7 +35,12 @@ namespace WestWindSystem.Entities
         public string QuantityPerUnit { get; set; }
         public short? MinimumOrderQuantity { get; set; }
         [Column(TypeName = "money")]
-        public decimal UnitPrice { get; set; }
+        public decimal UnitPrice 
+        { 
+            //to strip the excess decimal places of the decimal value
+            get { return decimal.Parse(_UnitPrice.ToString("0.00")); }
+            set { _UnitPrice = value; } 
+        }
         public int UnitsOnOrder { get; set; }
         public bool Discontinued { get; set; }
 

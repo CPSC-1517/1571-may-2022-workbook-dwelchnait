@@ -37,7 +37,13 @@ namespace WestWindSystem.BLL
 
         }
 
+        public Product Product_GetById(int productid)
+        {
+            return _context.Products
+                            .Where(x => x.ProductID == productid)  //filter
+                            .FirstOrDefault(); //if found return the first instance else null
 
+        }
         #endregion
 
     }

@@ -51,6 +51,10 @@
                 <tbody>
                     @foreach(var item in Model.ProductList )
                     {
+                        @*
+                            to format currency on a display field
+                            use the string.Format("{0:#,##0.00}",variablename)
+                        *@
                         <tr>
                             <td>
                                 <a href="/Samples/CRUDProduct/@item.ProductID">

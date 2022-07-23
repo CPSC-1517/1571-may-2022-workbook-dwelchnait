@@ -6,15 +6,15 @@
 
 <h1>CRUD: Product instance</h1>
 
-@*@if(Model.HasFeedback)
+@if(Model.HasFeedback)
 {
-    <p>@Model.FeedBack</p>
+    <p>@Model.Feedback</p>
 }
 
 @if(Model.HasError)
 {
-    <p style="color:firebrick;">@Model.ErrorMessage</p>
-}*@
+    <p style="color:firebrick;">@Model.ErrorMsg</p>
+}
 
 <form method="post">
     @*create a control that will hold the product pkey value
@@ -129,7 +129,7 @@
     else
     {
         <button type="submit" asp-page-handler="New" >Save New</button> 
-       <button type="submit" asp-page-handler="Update" disable>Update</button> 
+       <button type="submit" asp-page-handler="Update" disabled>Update</button> 
        @*add Javascript prompt (pre-code method) for delete confirmation using the 
            onclick event of the button
 
